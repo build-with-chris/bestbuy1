@@ -4,7 +4,7 @@ best_buy = None
 
 
 def main():
-
+    """depending on the users choice, the user can display, or buy items from the shop"""
     product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
                     products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
                     products.Product("Google Pixel 7", price=500, quantity=250)
@@ -47,6 +47,7 @@ def main():
 
 
 def display_menu():
+    """A simple shop menu as shown in Codio"""
     print(f'\n')
     print(f'   Store Menu\n'
           f'    ----------\n'
@@ -63,6 +64,7 @@ def display_menu():
 
 
 def display_product_details():
+    """A for loop that handles the different specifications regarding quantity of the products"""
     print(f'    ----------')
     for i, product in enumerate(best_buy.get_all_products(), 1):
         print(f'{i}. {product.name:28}, Price: ${product.price:4}, Quantity: {product.quantity}')
