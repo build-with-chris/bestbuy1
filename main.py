@@ -41,6 +41,8 @@ def main():
                     shopping_list.append((product_name, product_quan))
                 except TypeError:
                     print("Please enter valid input")
+                except IndexError:
+                    break
         if user_input == 4:
             print("Bye")
             break
