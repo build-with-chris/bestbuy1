@@ -1,12 +1,31 @@
 class Product():
     """creating a class with the attributes of product name price and quantity, that
         updates everytime the buy function or set_quantity is executed ."""
+
+
     def __init__(self, name, price, quantity):
+        """initializing only validated data for the store,
+        refactored into functions that validate the initial values"""
+        self._validate_name(name)
         self.name = name
+        self._validate_price(price)
         self.price = price
+        self._validate_quantity(quantity)
         self.quantity = quantity
         self._active = True
 
+    def _validate_name(self, name):
+        """playing around with different approaches to validate data"""
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError("Name can not be empty and needs to be a str")
+
+    def _validate_price(self, price):
+        if not isinstance(price, (int, float)) or price < 0:
+            raise ValueError ("Price must be positive float")
+
+    def _validate_quantity(self, quantity):
+        if not isinstance(quantity, int) or quantity<=0:
+            raise ValueError("Quantity has to be greater 0")
 
     def get_quantity(self):
         return self.quantity
@@ -17,8 +36,11 @@ class Product():
 
 
     def is_active(self):
-        return True
+        """deactivates the product if the quantity is 0"""
+        return self.quantity > 0
 
+    def activate(self):
+        return self.is_active() == True
 
     def deactivate(self):
         return self.is_active == False

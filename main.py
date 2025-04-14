@@ -2,16 +2,15 @@ import products
 import store
 best_buy = None
 
-
-def main():
-    """depending on the users choice, the user can display, or buy items from the shop"""
-    product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
+product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
                     products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
                     products.Product("Google Pixel 7", price=500, quantity=250)
                     ]
-    global best_buy
-    best_buy = store.Store(product_list)
 
+best_buy = store.Store(product_list)
+
+def start(store_obj):
+    """depending on the users choice, the user can display, or buy items from the shop"""
     while True:
         user_input = display_menu()
         if user_input == 1:
@@ -61,7 +60,7 @@ def display_menu():
         try:
             user_input = int(input("Please choose a number: "))
             return user_input
-        except Exception:
+        except ValueError:
             print("please enter a valid number")
 
 
@@ -73,4 +72,4 @@ def display_product_details():
 
 
 if __name__ == "__main__":
-    main()
+    start(best_buy)
