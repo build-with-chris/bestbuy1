@@ -7,7 +7,7 @@ product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
                     products.Product("Google Pixel 7", price=500, quantity=250)
                     ]
 
-best_buy = store.Store(product_list)
+BEST_BUY = store.Store(product_list)
 
 def start(store_obj):
     """depending on the users choice, the user can display, or buy items from the shop"""
@@ -16,7 +16,7 @@ def start(store_obj):
         if user_input == 1:
             display_product_details()
         if user_input == 2:
-            print(f"\nTotal amount: {best_buy.get_total_quantity()}\n")
+            print(f"\nTotal amount: {store_obj.get_total_quantity()}\n")
         if user_input == 3:
             display_product_details()
             print("When you want to finish order, enter empty text.")
@@ -25,23 +25,20 @@ def start(store_obj):
                 product_num = input("Which product # do you want? ")
                 product_quan = input("What amount do you want? ")
                 if product_num == "":
-                    if shopping_list == []:
+                    if not shopping_list:
                         break
-                    else:
-                        try:
-                            print(best_buy.order(shopping_list))
-                            break
-                        except ValueError:
-                            print("\nError while making order! Quantity larger than what exists")
-                            break
+                    try:
+                        print(store_obj.order(shopping_list))
+                    except ValueError as e:
+                        print(e)
                 try:
-                    product_name = best_buy.l_products[int(product_num) -1]
+                    product_name = store_obj.l_products[int(product_num) -1]
                     product_quan = int(product_quan)
                     shopping_list.append((product_name, product_quan))
+                except ValueError as e:
+                    break
                 except TypeError:
                     print("Please enter valid input")
-                except IndexError:
-                    break
         if user_input == 4:
             print("Bye")
             break
@@ -66,10 +63,10 @@ def display_menu():
 
 def display_product_details():
     """A for loop that handles the different specifications regarding quantity of the products"""
-    print(f'    ----------')
-    for i, product in enumerate(best_buy.get_all_products(), 1):
+    print('    ----------')
+    for i, product in enumerate(BEST_BUY.get_all_products(), 1):
         print(f'{i}. {product.name:28}, Price: ${product.price:4}, Quantity: {product.quantity}')
 
 
 if __name__ == "__main__":
-    start(best_buy)
+    start(BEST_BUY)

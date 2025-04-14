@@ -20,18 +20,22 @@ class Product():
             raise ValueError("Name can not be empty and needs to be a str")
 
     def _validate_price(self, price):
+        """price has to be greater than 0"""
         if not isinstance(price, (int, float)) or price < 0:
             raise ValueError ("Price must be positive float")
 
     def _validate_quantity(self, quantity):
+        """Quantity has to be greater than 0"""
         if not isinstance(quantity, int) or quantity<=0:
             raise ValueError("Quantity has to be greater 0")
 
     def get_quantity(self):
+        """returns total quantity of product"""
         return self.quantity
 
 
     def set_quantity(self, quantity):
+        """resets a new quantity"""
         self.quantity = quantity
 
 
@@ -40,10 +44,12 @@ class Product():
         return self.quantity > 0
 
     def activate(self):
-        return self.is_active() == True
+        """activating the product again"""
+        return self.is_active() is True
 
     def deactivate(self):
-        return self.is_active == False
+        """deactivating the product"""
+        return self.is_active is False
 
 
     def show(self):
@@ -57,7 +63,6 @@ class Product():
             self.quantity -= quantity
             total_price = self.price * quantity
             return total_price
-        else:
-            raise ValueError("You cannot order more than we have in stock")
+        raise ValueError("You cannot order more than we have in stock")
 
 

@@ -1,19 +1,21 @@
-import products
-
 class Store:
     def __init__(self, l_products):
+        """initializing the product list"""
         self.l_products = l_products
 
 
     def add_product(self, product):
+        """appending a product"""
         self.l_products.append(product)
 
 
     def remove_prodcut(self, product):
+        """removing a product"""
         self.l_products.remove(product)
 
 
     def get_all_products(self):
+        """get all active products"""
         active_product = []
         for product in self.l_products:
             if product.is_active():
@@ -22,6 +24,8 @@ class Store:
 
 
     def order(self, shopping_list):
+        """check the entity and reduce the quantity if possible
+        return the final price"""
         total = 0
         for product, amount in shopping_list:
             if amount > product.quantity:
