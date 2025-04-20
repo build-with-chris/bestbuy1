@@ -14,20 +14,24 @@ class Product():
         self.quantity = quantity
         self._active = True
 
+
     def _validate_name(self, name):
         """playing around with different approaches to validate data"""
         if not isinstance(name, str) or not name.strip():
             raise ValueError("Name can not be empty and needs to be a str")
+
 
     def _validate_price(self, price):
         """price has to be greater than 0"""
         if not isinstance(price, (int, float)) or price < 0:
             raise ValueError ("Price must be positive float")
 
+
     def _validate_quantity(self, quantity):
         """Quantity has to be greater than 0"""
         if not isinstance(quantity, int) or quantity<=0:
             raise ValueError("Quantity has to be greater 0")
+
 
     def get_quantity(self):
         """returns total quantity of product"""
@@ -37,19 +41,28 @@ class Product():
     def set_quantity(self, quantity):
         """resets a new quantity"""
         self.quantity = quantity
+        if self.quantity == 0:
+            self.deactivate()
 
 
     def is_active(self):
         """deactivates the product if the quantity is 0"""
         return self.quantity > 0
 
+
     def activate(self):
         """activating the product again"""
-        return self.is_active() is True
+        self._active = True
+        print(f"{self.name} is active")
+
 
     def deactivate(self):
         """deactivating the product"""
-        return self.is_active is False
+        if self._active:
+            self._active = False
+            print(f'{self.name} has been deactivated')
+        else:
+            print(f'{self.name} is already deactivated')
 
 
     def show(self):
