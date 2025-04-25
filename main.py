@@ -57,7 +57,10 @@ def validate_shopping_list(product_quan, product_num, store_obj):
         active_products = store_obj.get_all_products()
         product_name = active_products[int(product_num) - 1]
         product_quan = int(product_quan)
-        return (product_name, product_quan)
+        if product_quan > 0:
+            return (product_name, product_quan)
+        else:
+             raise ValueError
     except(TypeError, ValueError):
         print("Please enter valid input")
     except IndexError:
