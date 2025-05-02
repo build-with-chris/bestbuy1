@@ -46,23 +46,20 @@ class Product():
 
 
     def is_active(self):
-        """deactivates the product if the quantity is 0"""
-        return self.quantity > 0
+        """returns the activation status"""
+        return self._active
 
 
     def activate(self):
-        """activating the product again"""
+        """activating the product"""
         self._active = True
         print(f"{self.name} is active")
 
 
     def deactivate(self):
         """deactivating the product"""
-        if self._active:
-            self._active = False
-            print(f'{self.name} has been deactivated')
-        else:
-            print(f'{self.name} is already deactivated')
+        self._active = False
+        print(f'{self.name} has been deactivated')
 
 
     def show(self):
