@@ -3,16 +3,13 @@ class Store:
         """initializing the product list"""
         self.l_products = l_products
 
-
     def add_product(self, product):
         """appending a product"""
         self.l_products.append(product)
 
-
     def remove_prodcut(self, product):
         """removing a product"""
         self.l_products.remove(product)
-
 
     def get_all_products(self):
         """get all active products"""
@@ -21,7 +18,6 @@ class Store:
             if product.is_active():
                 active_product.append(product)
         return active_product
-
 
     def order(self, shopping_list):
         """check the entity and reduce the quantity if possible
@@ -35,7 +31,6 @@ class Store:
                 total += product.price * amount
 
         return f"Order made! Total payment: {total} dollars."
-
 
     def get_total_quantity(self):
         total_amount = []
