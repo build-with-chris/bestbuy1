@@ -24,11 +24,11 @@ class Store:
         return the final price"""
         total = 0
         for product, amount in shopping_list:
-            if amount > product.quantity:
-                raise ValueError(f"Not enough in stock")
-            else:
-                product.quantity -= amount
-                total += product.price * amount
+            try:
+                total += product.buy(amount)
+            except ValueError as e:
+                raise ValueError(f"{e}: {product}")
+
 
         return f"Order made! Total payment: {total} dollars."
 

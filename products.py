@@ -25,8 +25,10 @@ class Product():
 
     def _validate_quantity(self, quantity):
         """Quantity has to be greater than 0"""
-        if not isinstance(quantity, int) or quantity<=0:
-            raise ValueError("Quantity has to be greater 0")
+        if not isinstance(quantity, int) :
+            raise ValueError("Enter a legit integer")
+        elif quantity < 0:
+            raise ValueError("Order not possible due to limited stock")
 
     def get_quantity(self):
         """returns total quantity of product"""
@@ -60,7 +62,8 @@ class Product():
         """Check if the quantity in stock is sufficient and applies promotion if available.
         returns the total price for one product"""
         if self.quantity >= quantity:
-            self.quantity -= quantity
+            new_quantity = self.quantity - quantity
+            self.set_quantity(new_quantity)
             total_price = self.price * quantity
             return total_price
         raise ValueError("You cannot order more than we have in stock")
